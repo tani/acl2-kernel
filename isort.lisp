@@ -1,0 +1,6 @@
+(IN-PACKAGE "ACL2")
+(DEFUN PERM (X Y)
+    (IF (CONSP X)
+        (AND (MEMBER (CAR X) Y)
+             (PERM (CDR X) (REMOVE X (CAR X))))
+        (NOT (CONSP Y))))
