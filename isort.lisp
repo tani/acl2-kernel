@@ -3,7 +3,7 @@
        (IF (CONSP Y)
            (IF (EQUAL X (CAR Y))
                (CDR Y)
-               (CONS (CAR Y) (PERM X (CDR Y))))
+               (CONS (CAR Y) (DEL X (CDR Y))))
            NIL))
 (DEFUN PERM (X Y)
     (IF (CONSP X)
