@@ -50,7 +50,7 @@ class ACL2Kernel(Kernel):
             }
         interrupted = False
         try:
-            cmd = re.sub(r'[\r\n]', ' ', code.strip())
+            cmd = re.sub(r'[\r\n]|;[^\r\n]*[\r\n]+', ' ', code.strip())
             output = self.acl2wrapper.run_command(cmd, timeout=None)
         except KeyboardInterrupt:
             self.acl2wrapper.child.sendintr()
