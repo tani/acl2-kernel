@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Jupyter Kernel for ACL2"
 authors = ["TANIGUCHI Masaya <mew@cat.ovh>"]
 license = "Apache-2.0"
+exclude = ["example"]
 
 [tool.poetry.dependencies]
 python = "^3.6"
