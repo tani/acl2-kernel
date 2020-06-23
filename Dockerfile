@@ -18,3 +18,4 @@ RUN wget -q -O- https://github.com/acl2/acl2/archive/${ACL2_VER}.tar.gz | tar -z
 USER jovyan
 WORKDIR /home/jovyan
 RUN pip3 install --no-cache acl2-kernel==${ACL2_KERNEL_VER} && python3 -m acl2_kernel.install
+COPY Example.ipynb Example.ipynb
