@@ -6,15 +6,14 @@ import argparse
 from jupyter_client.kernelspec import KernelSpecManager
 from IPython.utils.tempdir import TemporaryDirectory
 
-kernel_json = {
-    'argv': [sys.executable, '-m', 'acl2_kernel', '-f', '{connection_file}'],
-    'display_name': 'ACL2',
-    'language': 'acl2',
-    'codemirror_mode': 'lisp',
-}
-
-
-def install_my_kernel_spec(user=True, prefix=None):
+def install_my_kernel_spec(user=True, prefix=None, acl2='acl2'):
+    kernel_json = {
+        'argv': [sys.executable, '-m', 'acl2_kernel', '-f', '{connection_file}'],
+        'display_name': 'ACL2',
+        'language': 'acl2',
+        'codemirror_mode': 'lisp',
+        'env': { 'acl2': acl2 },
+    }
     with TemporaryDirectory() as td:
         os.chmod(td, 0o755)  # Starts off as 700, not user readable
         with open(os.path.join(td, 'kernel.json'), 'w') as f:
@@ -54,7 +53,11 @@ def main(argv=None):
         help='Install KernelSpec in this prefix',
         default=None
     )
-
+    prefix_locations.add_argument(
+        '--acl2',
+        help='Install KernelSpec with this acl2',
+        default='acl2'
+    )
     args = parser.parse_args(argv)
 
     user = False
@@ -66,7 +69,7 @@ def main(argv=None):
     elif args.user or not _is_root():
         user = True
 
-    install_my_kernel_spec(user=user, prefix=prefix)
+    install_my_kernel_spec(user=user, prefix=prefix, acl2=acl2)
 
 
 if __name__ == '__main__':
