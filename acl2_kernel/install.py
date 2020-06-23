@@ -69,7 +69,7 @@ def main(argv=None):
     elif args.user or not _is_root():
         user = True
 
-    install_my_kernel_spec(user=user, prefix=prefix, acl2=acl2)
+    install_my_kernel_spec(user=user, prefix=prefix, acl2=args.acl2)
 
 
 if __name__ == '__main__':
