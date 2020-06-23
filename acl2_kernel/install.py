@@ -12,7 +12,7 @@ def install_my_kernel_spec(user=True, prefix=None, acl2='acl2'):
         'display_name': 'ACL2',
         'language': 'acl2',
         'codemirror_mode': 'lisp',
-        'env': { 'acl2': acl2 },
+        'env': { 'ACL2': acl2 },
     }
     with TemporaryDirectory() as td:
         os.chmod(td, 0o755)  # Starts off as 700, not user readable
