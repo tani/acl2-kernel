@@ -1,4 +1,4 @@
-# acl2-kernel
+# acl2-kernel [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/tani/acl2-kernel/master?filepath=Example.ipynb)
 
 Jupyter Kernel for ACL2
 
@@ -17,6 +17,7 @@ $ jupyter noteboook
 ```
 
 A running example is available in the `example/` directory.
+You can try it on [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/tani/acl2-kernel/master?filepath=Example.ipynb).
 
 ## Related Projects
 
