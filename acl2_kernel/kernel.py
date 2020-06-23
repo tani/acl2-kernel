@@ -6,7 +6,7 @@ from subprocess import PIPE, Popen
 import signal
 import re
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 class ACL2Kernel(Kernel):
     implementation = 'acl2_kernel'
