@@ -15,7 +15,7 @@ RUN wget -q -O- https://github.com/acl2/acl2/archive/${ACL2_VER}.tar.gz | tar -z
 
 # ACL2 Kernel
 
-ENV ACL2_KERNEL_VER=0.2.0
+ENV ACL2_KERNEL_VER=0.2.1
 RUN pip3 install --no-cache acl2-kernel==${ACL2_KERNEL_VER} \
     && python3 -m acl2_kernel.install --acl2="${PWD}/acl2-${ACL2_VER}/saved_acl2p"
 
