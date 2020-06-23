@@ -7,7 +7,7 @@ import signal
 import re
 import os
 
-__version__ = '0.2.1'
+__version__ = '0.2.2'
 
 class ACL2Kernel(Kernel):
     implementation = 'acl2_kernel'
@@ -15,7 +15,7 @@ class ACL2Kernel(Kernel):
 
     @property
     def language_version(self):
-        with Popen('acl2', stdout=PIPE, stdin=PIPE) as p:
+        with Popen(os.environ['ACL2'], stdout=PIPE, stdin=PIPE) as p:
             p.stdin.close()
             return re.findall(r'ACL2 Version.*$', p.stdout.read().decode('utf-8'), re.MULTILINE)[0]
     
