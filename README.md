@@ -1,4 +1,4 @@
-# acl2-kernel [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/tani/acl2-kernel/master?filepath=Example.ipynb)
+# acl2-kernel [![PyPI](https://img.shields.io/pypi/v/acl2-kernel)](https://pypi.org/project/acl2-kernel/) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/tani/acl2-kernel/master?filepath=Example.ipynb)
 
 Jupyter Kernel for ACL2
 
