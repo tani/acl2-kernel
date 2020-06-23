@@ -5,8 +5,9 @@ import pexpect
 from subprocess import PIPE, Popen
 import signal
 import re
+import os
 
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 class ACL2Kernel(Kernel):
     implementation = 'acl2_kernel'
@@ -26,7 +27,7 @@ class ACL2Kernel(Kernel):
         'name': 'acl2',
         'codemirror_mode': 'lisp',
         'mimetype': 'text/x-lisp',
-        'file_extension': '.acl2'
+        'file_extension': '.lisp'
     }
 
     def __init__(self, **kwargs):
@@ -36,7 +37,7 @@ class ACL2Kernel(Kernel):
     def _start_acl2(self):
         sig = signal.signal(signal.SIGINT, signal.SIG_DFL)
         try:
-            self.acl2wrapper = replwrap.REPLWrapper('acl2', 'ACL2 !>', None)
+            self.acl2wrapper = replwrap.REPLWrapper(os.environ['ACL2'], 'ACL2 !>', None)
         finally:
             signal.signal(signal.SIGINT, sig)
         
