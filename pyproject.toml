@@ -2,7 +2,7 @@
 name = "acl2-kernel"
 version = "0.2.2"
 description = "Jupyter Kernel for ACL2"
-authors = ["TANIGUCHI Masaya <mew@cat.ovh>"]
+authors = ["TANIGUCHI Masaya <m@docs.casa>"]
 license = "Apache-2.0"
 exclude = ["**/*.ipynb", "Dockerfile", ".dockerignore"]
 homepage = "https://github.com/tani/acl2-kernel"
