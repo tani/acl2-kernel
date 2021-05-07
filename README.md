@@ -10,10 +10,30 @@ Jupyter Kernel for ACL2
 
 ## Usage
 
+We follow to the standard jupyter kernel installation. So, you will install the kernel by `pip` command,
+and will call the installation command like,
+
 ```sh
 $ pip3 install jupyter acl2-kernel
 $ python3 -m acl2_kernel.install
 $ jupyter noteboook
+```
+
+You also can see the deep usage by `python3 -m acl2_kernel.install --help`.
+
+### Docker 
+
+In some case, you might want to run the kernel in the Docker containers.
+This repository contains Dockerfile example. You can build example image by the following command.
+
+```
+$ docker build . -t acl2
+```
+
+To run the container, you would type the command like
+
+```
+$ docker run --rm -p 8888:8888 acl2 jupyter notebook --ip='0.0.0.0'
 ```
 
 A running example is available in the `example/` directory.

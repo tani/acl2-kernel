@@ -1,3 +1,15 @@
+#
+# Build ACL2-kernel package
+#
+FROM python:3
+RUN pip install --no-cache poetry
+WORKDIR /work
+COPY ./ /work/
+RUN ls /work/ && poetry build
+
+#
+# Build Jupyter environment
+#
 FROM jupyter/minimal-notebook:04f7f60d34a6
 
 # ACL2
@@ -14,8 +26,9 @@ RUN wget -q -O- https://github.com/acl2/acl2/archive/${ACL2_VER}.tar.gz | tar -z
 
 # ACL2 Kernel
 
-ENV ACL2_KERNEL_VER=0.2.2
-RUN pip3 install --no-cache acl2-kernel==${ACL2_KERNEL_VER} \
+COPY --from=0 /work/dist/acl2_kernel-*.whl .
+RUN pip install --no-cache ./acl2_kernel-*.whl \
+    && rm ./acl2_kernel-*.whl \
     && python3 -m acl2_kernel.install --acl2="${PWD}/acl2-${ACL2_VER}/saved_acl2"
 
 # Notebook

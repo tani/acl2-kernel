@@ -25,8 +25,8 @@ class ACL2Kernel(Kernel):
     
     language_info = {
         'name': 'acl2',
-        'codemirror_mode': 'lisp',
-        'mimetype': 'text/x-lisp',
+        'codemirror_mode': 'commonlisp',
+        'mimetype': 'text/x-common-lisp',
         'file_extension': '.lisp'
     }
 
