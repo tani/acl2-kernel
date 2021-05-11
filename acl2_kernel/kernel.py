@@ -1,5 +1,5 @@
 from ipykernel.kernelbase import Kernel
-from pexpect import replwrap, EOF
+from pexpect import replwrap, EOF, TIMEOUT
 import pexpect
 
 from subprocess import PIPE, Popen
@@ -53,6 +53,12 @@ class ACL2Kernel(Kernel):
         try:
             cmd = re.sub(r'[\r\n]|;[^\r\n]*[\r\n]+', ' ', code.strip())
             output = self.acl2wrapper.run_command(cmd, timeout=None)
+            while True:
+                try:
+                    more_output = self.acl2wrapper.run_command(';', timeout=0)
+                except TIMEOUT:
+                    break
+                output += more_output
         except KeyboardInterrupt:
             self.acl2wrapper.child.sendintr()
             interrupted = True
