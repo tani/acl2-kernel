@@ -52,9 +52,27 @@ class ACL2Kernel(Kernel):
             }
         interrupted = False
         try:
+            # Remove all comments from the code block.
             cmd = re.sub(r';.*$', '', code, flags=re.MULTILINE)
+
+            # Count all commands in the code block. There are 2 types of
+            # commands recognized:
+            #
+            # 1. Keyword commands, such as:
+            #      :pl subsetp
+            #    using the ^[ \t]*:.*$ regex. This is a simple recognizer that
+            #    treats the whole line as the keyword command.
+            # 2. Top-level LISP forms, such as:
+            #      (defun app (x y)
+            #        (cond ((endp x) y)
+            #              (t (cons (car x)
+            #                       (app (cdr x) y)))))
+            #    using the \((?>[^()]|(?R))*\) regex.
             num_cmds = len(regex.findall(r'^[ \t]*:.*$|\((?>[^()]|(?R))*\)', cmd, regex.MULTILINE))
+
+            # Convert all \r and \n into spaces.
             cmd = re.sub(r'[\r\n]', ' ', cmd.strip())
+
             output = self.acl2wrapper.run_command(cmd, timeout=None)
             for i in range(num_cmds - 1):
                 output += self.acl2wrapper.run_command(';', timeout=None)
