@@ -1,6 +1,7 @@
 from ipykernel.kernelbase import Kernel
 from pexpect import replwrap, EOF, TIMEOUT
 import pexpect
+import regex
 
 from subprocess import PIPE, Popen
 import signal
@@ -51,8 +52,11 @@ class ACL2Kernel(Kernel):
             }
         interrupted = False
         try:
+            num_cmds = len(regex.findall(r'^[ \t]*:.*$|\((?>[^()]|(?R))*\)', code, regex.MULTILINE))
             cmd = re.sub(r'[\r\n]|;[^\r\n]*[\r\n]+', ' ', code.strip())
             output = self.acl2wrapper.run_command(cmd, timeout=None)
+            for i in range(num_cmds - 1):
+                output += self.acl2wrapper.run_command(';', timeout=None)
             while True:
                 try:
                     more_output = self.acl2wrapper.run_command(';', timeout=0)
