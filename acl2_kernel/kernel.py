@@ -7,7 +7,7 @@ import signal
 import re
 import os
 
-__version__ = '0.2.2'
+__version__ = '0.2.3'
 
 class ACL2Kernel(Kernel):
     implementation = 'acl2_kernel'
