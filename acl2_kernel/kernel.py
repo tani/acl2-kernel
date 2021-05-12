@@ -52,8 +52,9 @@ class ACL2Kernel(Kernel):
             }
         interrupted = False
         try:
-            num_cmds = len(regex.findall(r'^[ \t]*:.*$|\((?>[^()]|(?R))*\)', code, regex.MULTILINE))
-            cmd = re.sub(r'[\r\n]|;[^\r\n]*[\r\n]+', ' ', code.strip())
+            cmd = re.sub(r';.*$', '', code, flags=re.MULTILINE)
+            num_cmds = len(regex.findall(r'^[ \t]*:.*$|\((?>[^()]|(?R))*\)', cmd, regex.MULTILINE))
+            cmd = re.sub(r'[\r\n]', ' ', cmd.strip())
             output = self.acl2wrapper.run_command(cmd, timeout=None)
             for i in range(num_cmds - 1):
                 output += self.acl2wrapper.run_command(';', timeout=None)
