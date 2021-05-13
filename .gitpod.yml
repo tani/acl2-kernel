@@ -2,6 +2,6 @@ tasks:
   - command: >-
       export PIP_USER=false &&
       pip install poetry &&
-      poertry install &&
-      poertry build
+      poetry install &&
+      poetry build
 
