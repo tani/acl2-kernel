@@ -38,7 +38,18 @@ class ACL2Kernel(Kernel):
     def _start_acl2(self):
         sig = signal.signal(signal.SIGINT, signal.SIG_DFL)
         try:
-            self.acl2wrapper = replwrap.REPLWrapper(os.environ['ACL2'], 'ACL2 !>', None)
+            prompt_change_cmd = '''
+                    (progn
+                      (set-state-ok t)
+                      (defun jupyter-prompt (channel state)
+                        (declare (xargs :mode :program))
+                        (fmt1 "JPY-ACL2>" '() 0 channel state nil))
+                      (set-state-ok nil))
+                    (set-ld-prompt 'jupyter-prompt state)
+                    (reset-prehistory)'''
+            self.acl2wrapper = replwrap.REPLWrapper(os.environ['ACL2'], 'ACL2 !>', prompt_change_cmd, 'JPY-ACL2>')
+            self.acl2wrapper.run_command(';', timeout=None) # This discards the output of progn.
+            self.acl2wrapper.run_command(';', timeout=None) # This discards the output of reset-prehistory.
         finally:
             signal.signal(signal.SIGINT, sig)
         
