@@ -39,12 +39,11 @@ class ACL2Kernel(Kernel):
         sig = signal.signal(signal.SIGINT, signal.SIG_DFL)
         try:
             prompt_change_cmd = '''
-                    (progn
+                    (encapsulate ()
                       (set-state-ok t)
                       (defun jupyter-prompt (channel state)
                         (declare (xargs :mode :program))
-                        (fmt1 "JPY-ACL2>" '() 0 channel state nil))
-                      (set-state-ok nil))
+                        (fmt1 "JPY-ACL2>" '() 0 channel state nil)))
                     (set-ld-prompt 'jupyter-prompt state)
                     (reset-prehistory)'''
             self.acl2wrapper = replwrap.REPLWrapper(os.environ['ACL2'], 'ACL2 !>', prompt_change_cmd, 'JPY-ACL2>')
