@@ -14,7 +14,7 @@ FROM jupyter/minimal-notebook:04f7f60d34a6
 
 # ACL2
 
-ENV ACL2_VER=8.3 LISP=sbcl
+ENV ACL2_VER=8.4 LISP=sbcl
 
 USER root
 RUN apt-get update && apt-get install -y ${LISP} && apt-get clean && rm -rf /var/lib/apt/lists/*
