@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "acl2-kernel"
-version = "0.2.7"
+version = "0.2.8"
 description = "Jupyter Kernel for ACL2"
 authors = ["TANIGUCHI Masaya <m@docs.casa>"]
 license = "Apache-2.0"
