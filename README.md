@@ -16,7 +16,7 @@ and will call the installation command like,
 ```sh
 $ pip3 install jupyter acl2-kernel
 $ python3 -m acl2_kernel.install
-$ jupyter noteboook
+$ jupyter notebook
 ```
 
 You also can see the deep usage by `python3 -m acl2_kernel.install --help`.
