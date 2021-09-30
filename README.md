@@ -39,6 +39,16 @@ $ docker run --rm -p 8888:8888 acl2 jupyter notebook --ip='0.0.0.0'
 A running example is available in the `example/` directory.
 You can try it on [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/tani/acl2-kernel/master?filepath=Example.ipynb).
 
+## Building from source
+
+Install [Poetry](https://python-poetry.org/) and in the root directory, do
+
+```
+$ poetry build
+$ pip3 install dist/acl2-kernel-<version>.tar.gz
+$ python3 -m acl2_kernel.install --acl2 <path-to-acl2-binary>
+```
+
 ## Related Projects
 
 - [Jupyter](https://jupyter.org/) - Softwares for interactive computing
