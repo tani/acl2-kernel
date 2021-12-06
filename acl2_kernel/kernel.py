@@ -8,7 +8,8 @@ import signal
 import re
 import os
 
-__version__ = '0.2.9'
+__version__ = '0.3.1'
+
 
 class ACL2Kernel(Kernel):
     implementation = 'acl2_kernel'
@@ -19,13 +20,14 @@ class ACL2Kernel(Kernel):
         with Popen(os.environ['ACL2'], stdout=PIPE, stdin=PIPE) as p:
             p.stdin.close()
             return re.findall(r'ACL2 Version.*$', p.stdout.read().decode('utf-8'), re.MULTILINE)[0]
-    
+
     @property
     def banner(self):
         return u'ACL2 Kernel (%s)' % self.language_version
-    
+
     language_info = {
         'name': 'acl2',
+        'pygments_lexer': 'common-lisp',
         'codemirror_mode': 'commonlisp',
         'mimetype': 'text/x-common-lisp',
         'file_extension': '.lisp'
@@ -48,13 +50,14 @@ class ACL2Kernel(Kernel):
                     (set-ld-prompt 'jupyter-prompt state)
                     (defttag nil)
                     (reset-prehistory)'''
-            self.acl2wrapper = replwrap.REPLWrapper(os.environ['ACL2'], 'ACL2 !>', prompt_change_cmd, 'JPY-ACL2>')
+            self.acl2wrapper = replwrap.REPLWrapper(
+                os.environ['ACL2'], 'ACL2 !>', prompt_change_cmd, 'JPY-ACL2>')
             # Discard the output of prompt_change_cmd.
             for i in range(3):
                 self.acl2wrapper.run_command(';', timeout=None)
         finally:
             signal.signal(signal.SIGINT, sig)
-        
+
     def do_execute(self, code, silent, store_history=True, user_expressions=None, allow_stdin=False):
         if not code.strip():
             return {
@@ -81,7 +84,8 @@ class ACL2Kernel(Kernel):
             #              (t (cons (car x)
             #                       (app (cdr x) y)))))
             #    using the \((?>[^()]|(?R))*\) regex.
-            num_cmds = len(regex.findall(r'^[ \t]*:.*$|\((?>[^()]|(?R))*\)', cmd, regex.MULTILINE))
+            num_cmds = len(regex.findall(
+                r'^[ \t]*:.*$|\((?>[^()]|(?R))*\)', cmd, regex.MULTILINE))
 
             # Convert all \r and \n into spaces.
             cmd = re.sub(r'[\r\n]', ' ', cmd.strip())
@@ -99,7 +103,7 @@ class ACL2Kernel(Kernel):
             self.acl2wrapper.child.sendintr()
             interrupted = True
             self.acl2wrapper._expect_prompt()
-            output =  self.acl2wrapper.child.before
+            output = self.acl2wrapper.child.before
             self.process_output(output)
         except EOF:
             output = self.acl2wrapper.child.before + 'Restarting ACL2'
