@@ -18,8 +18,8 @@ python-versions = ">=3.5"
 cffi = ">=1.0.0"
 
 [package.extras]
-dev = ["coverage[toml] (>=5.0.2)", "hypothesis", "pytest", "sphinx", "furo", "wheel", "pre-commit"]
-docs = ["sphinx", "furo"]
+dev = ["coverage[toml] (>=5.0.2)", "furo", "hypothesis", "pre-commit", "pytest", "sphinx", "wheel"]
+docs = ["furo", "sphinx"]
 tests = ["coverage[toml] (>=5.0.2)", "hypothesis", "pytest"]
 
 [[package]]
@@ -39,10 +39,10 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [package.extras]
-dev = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "mypy", "pytest-mypy-plugins", "zope.interface", "furo", "sphinx", "sphinx-notfound-page", "pre-commit"]
-docs = ["furo", "sphinx", "zope.interface", "sphinx-notfound-page"]
-tests = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "mypy", "pytest-mypy-plugins", "zope.interface"]
-tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "mypy", "pytest-mypy-plugins"]
+dev = ["coverage[toml] (>=5.0.2)", "furo", "hypothesis", "mypy", "pre-commit", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "six", "sphinx", "sphinx-notfound-page", "zope.interface"]
+docs = ["furo", "sphinx", "sphinx-notfound-page", "zope.interface"]
+tests = ["coverage[toml] (>=5.0.2)", "hypothesis", "mypy", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "six", "zope.interface"]
+tests-no-zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "mypy", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "six"]
 
 [[package]]
 name = "autopep8"
@@ -146,7 +146,7 @@ tornado = ">=4.2,<7.0"
 traitlets = ">=5.1.0,<6.0"
 
 [package.extras]
-test = ["pytest (!=5.3.4)", "pytest-cov", "flaky", "ipyparallel"]
+test = ["flaky", "ipyparallel", "pytest (!=5.3.4)", "pytest-cov"]
 
 [[package]]
 name = "ipython"
@@ -167,6 +167,7 @@ pexpect = {version = ">4.3", markers = "sys_platform != \"win32\""}
 pickleshare = "*"
 prompt-toolkit = ">=2.0.0,<3.0.0 || >3.0.0,<3.0.1 || >3.0.1,<3.1.0"
 pygments = "*"
+setuptools = ">=18.5"
 traitlets = ">=4.2"
 
 [package.extras]
@@ -175,10 +176,10 @@ doc = ["Sphinx (>=1.3)"]
 kernel = ["ipykernel"]
 nbconvert = ["nbconvert"]
 nbformat = ["nbformat"]
-notebook = ["notebook", "ipywidgets"]
+notebook = ["ipywidgets", "notebook"]
 parallel = ["ipyparallel"]
 qtconsole = ["qtconsole"]
-test = ["nose (>=0.10.1)", "requests", "testpath", "pygments", "nbformat", "ipykernel", "numpy (>=1.17)"]
+test = ["ipykernel", "nbformat", "nose (>=0.10.1)", "numpy (>=1.17)", "pygments", "requests", "testpath"]
 
 [[package]]
 name = "ipython-genutils"
@@ -206,7 +207,7 @@ traitlets = ">=4.3.1"
 widgetsnbextension = ">=3.5.0,<3.6.0"
 
 [package.extras]
-test = ["pytest (>=3.6.0)", "pytest-cov", "mock"]
+test = ["mock", "pytest (>=3.6.0)", "pytest-cov"]
 
 [[package]]
 name = "jedi"
@@ -251,7 +252,7 @@ pyrsistent = ">=0.14.0,<0.17.0 || >0.17.0,<0.17.1 || >0.17.1,<0.17.2 || >0.17.2"
 
 [package.extras]
 format = ["fqdn", "idna", "isoduration", "jsonpointer (>1.13)", "rfc3339-validator", "rfc3987", "uri-template", "webcolors (>=1.11)"]
-format_nongpl = ["fqdn", "idna", "isoduration", "jsonpointer (>1.13)", "rfc3339-validator", "rfc3986-validator (>0.1.0)", "uri-template", "webcolors (>=1.11)"]
+format-nongpl = ["fqdn", "idna", "isoduration", "jsonpointer (>1.13)", "rfc3339-validator", "rfc3986-validator (>0.1.0)", "uri-template", "webcolors (>=1.11)"]
 
 [[package]]
 name = "jupyter"
@@ -287,7 +288,7 @@ traitlets = "*"
 
 [package.extras]
 doc = ["sphinx (>=1.3.6)", "sphinx-rtd-theme", "sphinxcontrib-github-alt"]
-test = ["async-generator", "ipykernel", "ipython", "mock", "pytest-asyncio", "pytest-timeout", "pytest", "mypy", "pre-commit", "jedi (<0.18)"]
+test = ["async-generator", "ipykernel", "ipython", "jedi (<0.18)", "mock", "mypy", "pre-commit", "pytest", "pytest-asyncio", "pytest-timeout"]
 
 [[package]]
 name = "jupyter-console"
@@ -381,9 +382,9 @@ nest-asyncio = "*"
 traitlets = ">=4.2"
 
 [package.extras]
-dev = ["codecov", "coverage", "ipython", "ipykernel", "ipywidgets", "pytest (>=4.1)", "pytest-cov (>=2.6.1)", "check-manifest", "flake8", "mypy", "tox", "bumpversion", "xmltodict", "pip (>=18.1)", "wheel (>=0.31.0)", "setuptools (>=38.6.0)", "twine (>=1.11.0)", "black"]
-sphinx = ["Sphinx (>=1.7)", "sphinx-book-theme", "mock", "moto", "myst-parser"]
-test = ["codecov", "coverage", "ipython", "ipykernel", "ipywidgets", "pytest (>=4.1)", "pytest-cov (>=2.6.1)", "check-manifest", "flake8", "mypy", "tox", "bumpversion", "xmltodict", "pip (>=18.1)", "wheel (>=0.31.0)", "setuptools (>=38.6.0)", "twine (>=1.11.0)", "black"]
+dev = ["black", "bumpversion", "check-manifest", "codecov", "coverage", "flake8", "ipykernel", "ipython", "ipywidgets", "mypy", "pip (>=18.1)", "pytest (>=4.1)", "pytest-cov (>=2.6.1)", "setuptools (>=38.6.0)", "tox", "twine (>=1.11.0)", "wheel (>=0.31.0)", "xmltodict"]
+sphinx = ["Sphinx (>=1.7)", "mock", "moto", "myst-parser", "sphinx-book-theme"]
+test = ["black", "bumpversion", "check-manifest", "codecov", "coverage", "flake8", "ipykernel", "ipython", "ipywidgets", "mypy", "pip (>=18.1)", "pytest (>=4.1)", "pytest-cov (>=2.6.1)", "setuptools (>=38.6.0)", "tox", "twine (>=1.11.0)", "wheel (>=0.31.0)", "xmltodict"]
 
 [[package]]
 name = "nbconvert"
@@ -409,10 +410,10 @@ testpath = "*"
 traitlets = ">=4.2"
 
 [package.extras]
-all = ["pytest", "pytest-cov", "pytest-dependency", "ipykernel", "ipywidgets (>=7)", "pyppeteer (==0.2.2)", "tornado (>=4.0)", "sphinx (>=1.5.1)", "sphinx-rtd-theme", "nbsphinx (>=0.2.12)", "ipython"]
-docs = ["sphinx (>=1.5.1)", "sphinx-rtd-theme", "nbsphinx (>=0.2.12)", "ipython"]
+all = ["ipykernel", "ipython", "ipywidgets (>=7)", "nbsphinx (>=0.2.12)", "pyppeteer (==0.2.2)", "pytest", "pytest-cov", "pytest-dependency", "sphinx (>=1.5.1)", "sphinx-rtd-theme", "tornado (>=4.0)"]
+docs = ["ipython", "nbsphinx (>=0.2.12)", "sphinx (>=1.5.1)", "sphinx-rtd-theme"]
 serve = ["tornado (>=4.0)"]
-test = ["pytest", "pytest-cov", "pytest-dependency", "ipykernel", "ipywidgets (>=7)", "pyppeteer (==0.2.2)"]
+test = ["ipykernel", "ipywidgets (>=7)", "pyppeteer (==0.2.2)", "pytest", "pytest-cov", "pytest-dependency"]
 webpdf = ["pyppeteer (==0.2.2)"]
 
 [[package]]
@@ -431,7 +432,7 @@ traitlets = ">=4.1"
 
 [package.extras]
 fast = ["fastjsonschema"]
-test = ["check-manifest", "fastjsonschema", "testpath", "pytest", "pytest-cov"]
+test = ["check-manifest", "fastjsonschema", "pytest", "pytest-cov", "testpath"]
 
 [[package]]
 name = "nest-asyncio"
@@ -467,9 +468,9 @@ tornado = ">=6.1"
 traitlets = ">=4.2.1"
 
 [package.extras]
-docs = ["sphinx", "nbsphinx", "sphinxcontrib-github-alt", "sphinx-rtd-theme", "myst-parser"]
+docs = ["myst-parser", "nbsphinx", "sphinx", "sphinx-rtd-theme", "sphinxcontrib-github-alt"]
 json-logging = ["json-logging"]
-test = ["pytest", "coverage", "requests", "nbval", "selenium", "pytest-cov", "requests-unixsocket"]
+test = ["coverage", "nbval", "pytest", "pytest-cov", "requests", "requests-unixsocket", "selenium"]
 
 [[package]]
 name = "packaging"
@@ -503,7 +504,7 @@ testing = ["docopt", "pytest (>=3.0.7)"]
 
 [[package]]
 name = "pexpect"
-version = "4.8.0"
+version = "4.9.0"
 description = "Pexpect allows easy control of interactive console applications."
 category = "main"
 optional = false
@@ -636,7 +637,7 @@ python-versions = "*"
 ujson = ">=3.0.0"
 
 [package.extras]
-test = ["versioneer", "pylint", "pycodestyle", "pyflakes", "pytest", "mock", "pytest-cov", "coverage"]
+test = ["coverage", "mock", "pycodestyle", "pyflakes", "pylint", "pytest", "pytest-cov", "versioneer"]
 
 [[package]]
 name = "python-language-server"
@@ -662,7 +663,7 @@ pydocstyle = ["pydocstyle (>=2.0.0)"]
 pyflakes = ["pyflakes (>=2.2.0,<2.3.0)"]
 pylint = ["pylint (>=2.5.0)"]
 rope = ["rope (>0.10.5)"]
-test = ["versioneer", "pylint (>=2.5.0)", "pytest", "mock", "pytest-cov", "coverage", "numpy", "pandas", "matplotlib", "flaky", "pyqt5"]
+test = ["coverage", "flaky", "matplotlib", "mock", "numpy", "pandas", "pylint (>=2.5.0)", "pyqt5", "pytest", "pytest-cov", "versioneer"]
 yapf = ["yapf"]
 
 [[package]]
@@ -740,9 +741,22 @@ optional = false
 python-versions = "*"
 
 [package.extras]
-nativelib = ["pyobjc-framework-cocoa", "pywin32"]
-objc = ["pyobjc-framework-cocoa"]
+nativelib = ["pyobjc-framework-Cocoa", "pywin32"]
+objc = ["pyobjc-framework-Cocoa"]
 win32 = ["pywin32"]
+
+[[package]]
+name = "setuptools"
+version = "69.0.2"
+description = "Easily download, build, install, upgrade, and uninstall Python packages"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[package.extras]
+docs = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "pygments-github-lexers (==0.0.5)", "rst.linker (>=1.9)", "sphinx (<7.2.5)", "sphinx (>=3.5)", "sphinx-favicon", "sphinx-inline-tabs", "sphinx-lint", "sphinx-notfound-page (>=1,<2)", "sphinx-reredirects", "sphinxcontrib-towncrier"]
+testing = ["build[virtualenv]", "filelock (>=3.4.0)", "flake8-2020", "ini2toml[lite] (>=0.9)", "jaraco.develop (>=7.21)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "pip (>=19.1)", "pytest (>=6)", "pytest-black (>=0.3.7)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=2.2)", "pytest-mypy (>=0.9.1)", "pytest-perf", "pytest-ruff", "pytest-timeout", "pytest-xdist", "tomli-w (>=1.0.0)", "virtualenv (>=13.0.0)", "wheel"]
+testing-integration = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "packaging (>=23.1)", "pytest", "pytest-enabler", "pytest-xdist", "tomli", "virtualenv (>=13.0.0)", "wheel"]
 
 [[package]]
 name = "six"
@@ -777,7 +791,7 @@ optional = false
 python-versions = ">= 3.5"
 
 [package.extras]
-test = ["pytest", "pathlib2"]
+test = ["pathlib2", "pytest"]
 
 [[package]]
 name = "toml"
@@ -1140,8 +1154,7 @@ parso = [
     {file = "parso-0.7.1.tar.gz", hash = "sha256:caba44724b994a8a5e086460bb212abc5a8bc46951bf4a9a1210745953622eb9"},
 ]
 pexpect = [
-    {file = "pexpect-4.8.0-py2.py3-none-any.whl", hash = "sha256:0b48a55dcb3c05f3329815901ea4fc1537514d6ba867a152b581d69ae3710937"},
-    {file = "pexpect-4.8.0.tar.gz", hash = "sha256:fc65a43959d153d0114afe13997d439c22823a27cefceb5ff35c2178c6784c0c"},
+    {file = "pexpect-4.9.0-py2.py3-none-any.whl", hash = "sha256:7236d1e080e4936be2dc3e326cec0af72acf9212a7e1d060210e70a47e253523"},
 ]
 pickleshare = [
     {file = "pickleshare-0.7.5-py2.py3-none-any.whl", hash = "sha256:9649af414d74d4df115d5d718f82acb59c9d418196b7b4290ed47a12ce62df56"},
@@ -1374,6 +1387,10 @@ regex = [
 send2trash = [
     {file = "Send2Trash-1.8.0-py3-none-any.whl", hash = "sha256:f20eaadfdb517eaca5ce077640cb261c7d2698385a6a0f072a4a5447fd49fa08"},
     {file = "Send2Trash-1.8.0.tar.gz", hash = "sha256:d2c24762fd3759860a0aff155e45871447ea58d2be6bdd39b5c8f966a0c99c2d"},
+]
+setuptools = [
+    {file = "setuptools-69.0.2-py3-none-any.whl", hash = "sha256:1e8fdff6797d3865f37397be788a4e3cba233608e9b509382a2777d25ebde7f2"},
+    {file = "setuptools-69.0.2.tar.gz", hash = "sha256:735896e78a4742605974de002ac60562d286fa8051a7e2299445e8e8fbb01aa6"},
 ]
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
