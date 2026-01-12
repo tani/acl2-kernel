@@ -58,6 +58,44 @@ class ACL2Kernel(Kernel):
         finally:
             signal.signal(signal.SIGINT, sig)
 
+    def _count_and_check_lisp_forms(self, code):
+        # We don't count parenthesis inside a string.
+        in_string = False
+        # If a char has a "\", then we ignore it.
+        ignore_next_char = False
+
+        nb_of_forms = 0
+
+        # Counter to keep tracks of opened parenthesis. The counter must always
+        # be positive (otherwise there are more closing parenthesis) and must
+        # be 0 at the end.
+        current_parenthesis_level = 0
+
+        for c in code:
+            # Escaped char.
+            if ignore_next_char:
+                ignore_next_char = False
+
+            # Next char will be escaped
+            elif c == '\\':
+                ignore_next_char = True;
+
+            # Opening or closing a string.
+            elif c == '"':
+                in_string = not in_string
+
+            # We are looking at code, we check the parenthesis.
+            elif not in_string:
+                if c == '(':
+                    if current_parenthesis_level == 0:
+                        nb_of_forms += 1
+                    current_parenthesis_level += 1
+                elif c == ')':
+                    current_parenthesis_level -= 1
+                    if current_parenthesis_level < 0:
+                        return (False, nb_of_forms)
+        return (current_parenthesis_level == 0, nb_of_forms) 
+
     def do_execute(self, code, silent, store_history=True, user_expressions=None, allow_stdin=False):
         if not code.strip():
             return {
@@ -84,8 +122,18 @@ class ACL2Kernel(Kernel):
             #              (t (cons (car x)
             #                       (app (cdr x) y)))))
             #    using the \((?>[^()]|(?R))*\) regex.
-            num_cmds = len(regex.findall(
-                r'^[ \t]*:.*$|\((?>[^()]|(?R))*\)', cmd, regex.MULTILINE))
+            #
+
+            num_cmds = len(regex.findall(r'^[ \t]*:.*$', cmd, regex.MULTILINE))
+
+            (is_ok, nb_of_forms) = self._count_and_check_lisp_forms(code) 
+            if not is_ok:
+                return {
+                    'status': 'error',
+                    'execution_count': self.execution_count
+                }
+
+            num_cmds += nb_of_forms
 
             # Convert all \r and \n into spaces.
             cmd = re.sub(r'[\r\n]', ' ', cmd.strip())
@@ -104,11 +152,11 @@ class ACL2Kernel(Kernel):
             interrupted = True
             self.acl2wrapper._expect_prompt()
             output = self.acl2wrapper.child.before
-            self.process_output(output)
+#            self.process_output(output)
         except EOF:
             output = self.acl2wrapper.child.before + 'Restarting ACL2'
             self._start_acl2()
-            self.process_output(output)
+#            self.process_output(output)
         if interrupted:
             return {
                 'status': 'abort',
