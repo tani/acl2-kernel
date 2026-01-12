@@ -41,11 +41,11 @@ You can try it on [![Binder](https://mybinder.org/badge_logo.svg)](https://mybin
 
 ## Building from source
 
-Install [Poetry](https://python-poetry.org/) and in the root directory, do
+Install [uv](https://github.com/astral-sh/uv) and in the root directory, do
 
 ```
-$ poetry build
-$ pip3 install dist/acl2-kernel-<version>.tar.gz
+$ uv build
+$ pip3 install dist/acl2_kernel-0.3.1.tar.gz
 $ python3 -m acl2_kernel.install --acl2 <path-to-acl2-binary>
 ```
 

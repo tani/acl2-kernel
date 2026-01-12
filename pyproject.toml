@@ -1,27 +1,39 @@
-[tool.poetry]
+[project]
 name = "acl2-kernel"
 version = "0.3.1"
 description = "Jupyter Kernel for ACL2"
-authors = ["TANIGUCHI Masaya <m@docs.casa>"]
-license = "Apache-2.0"
-exclude = ["**/*.ipynb", "Dockerfile", ".dockerignore"]
+readme = "README.md"
+authors = [
+    { name = "TANIGUCHI Masaya", email = "m@docs.casa" }
+]
+requires-python = ">=3.8"
+license = { text = "Apache-2.0" }
+dependencies = [
+    "pexpect>=4.8.0,<5",
+    "ipykernel>=6.6.0,<7",
+    "jupyter-client>=6.1.3,<8",
+    "ipython>=7.16.2,<8",
+    "regex>=2021.11.10",
+]
+
+[project.urls]
 homepage = "https://github.com/tani/acl2-kernel"
 repository = "https://github.com/tani/acl2-kernel.git"
-readme = "README.md"
 
-[tool.poetry.dependencies]
-python = "^3.8"
-pexpect = "^4.8.0"
-ipykernel = "^6.6.0"
-jupyter_client = "^6.1.3"
-ipython = "^7.16.2"
-regex = "^2021.11.10"
-
-[tool.poetry.dev-dependencies]
-jupyter = "^1.0.0"
-python-language-server = "^0.36.2"
-autopep8 = "^1.6.0"
+[dependency-groups]
+dev = [
+    "jupyter>=1.0.0,<2",
+    "python-language-server>=0.36.2,<0.37.0",
+    "autopep8>=1.6.0,<2",
+]
 
 [build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+exclude = [
+  "**/*.ipynb",
+  "Dockerfile",
+  ".dockerignore",
+]

@@ -1,11 +1,10 @@
 #
 # Build ACL2-kernel package
 #
-FROM python:3
-RUN pip install --no-cache poetry
+FROM ghcr.io/astral-sh/uv:debian AS builder
 WORKDIR /work
 COPY ./ /work/
-RUN ls /work/ && poetry build
+RUN uv build
 
 #
 # Build Jupyter environment
