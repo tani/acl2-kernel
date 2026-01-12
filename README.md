@@ -45,7 +45,7 @@ Install [uv](https://github.com/astral-sh/uv) and in the root directory, do
 
 ```
 $ uv build
-$ pip3 install dist/acl2_kernel-0.3.1.tar.gz
+$ pip3 install dist/acl2_kernel-0.4.0.tar.gz
 $ python3 -m acl2_kernel.install --acl2 <path-to-acl2-binary>
 ```
 

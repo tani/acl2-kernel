@@ -1,6 +1,6 @@
 [project]
 name = "acl2-kernel"
-version = "0.3.1"
+version = "0.4.0"
 description = "Jupyter Kernel for ACL2"
 readme = "README.md"
 authors = [
